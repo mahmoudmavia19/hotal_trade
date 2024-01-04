@@ -1,3 +1,5 @@
+import 'package:hotal_trade/presentation/select_country_bottomsheet/controller/select_country_controller.dart';
+
 import '../controller/sign_up_two_controller.dart';
 import 'package:get/get.dart';
 
@@ -9,5 +11,6 @@ class SignUpTwoBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => SignUpTwoController());
+    Get.lazyPut(() => SelectCountryController());
   }
 }

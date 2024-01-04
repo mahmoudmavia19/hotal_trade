@@ -1,4 +1,4 @@
-final Map<String, String> enUs = {
+final Map<String, String> arAA = {
   // splash screen Screen
   "lbl_logo": "logo",
 

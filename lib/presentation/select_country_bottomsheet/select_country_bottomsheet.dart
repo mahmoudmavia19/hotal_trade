@@ -9,9 +9,7 @@ class SelectCountryBottomsheet extends StatelessWidget {
   SelectCountryBottomsheet(
     this.controller, {
     Key? key,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key,);
 
   SelectCountryController controller;
 
@@ -22,22 +20,25 @@ class SelectCountryBottomsheet extends StatelessWidget {
       decoration: AppDecoration.fillOnErrorContainer.copyWith(
         borderRadius: BorderRadiusStyle.customBorderTL16,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildRowWithTextAndImage(),
-          SizedBox(height: 16.v),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.h),
-            child: CustomSearchView(
-              controller: controller.searchController,
-              hintText: "lbl9".tr,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildRowWithTextAndImage(),
+            SizedBox(height: 16.v),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.h),
+              child: CustomSearchView(
+                autofocus: false,
+                controller: controller.searchController,
+                hintText: "lbl9".tr,
+              ),
             ),
-          ),
-          SizedBox(height: 27.v),
-          _buildListOfRows(),
-          SizedBox(height: 33.v),
-        ],
+            SizedBox(height: 27.v),
+            _buildListOfRows(),
+            SizedBox(height: 33.v),
+          ],
+        ),
       ),
     );
   }
@@ -49,22 +50,27 @@ class SelectCountryBottomsheet extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(20.h, 15.v, 20.h, 14.v),
       decoration: AppDecoration.outlineGray,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: CustomImageView(
+              imagePath: ImageConstant.imgArrowRight,
+              height: 24.adaptSize,
+              width: 24.adaptSize,
+              margin: EdgeInsets.only(
+                left: 109.h,
+                top: 1.v,
+              ),
+            ),
+          ),
           Padding(
             padding: EdgeInsets.only(top: 2.v),
             child: Text(
               "lbl8".tr,
               style: theme.textTheme.titleMedium,
-            ),
-          ),
-          CustomImageView(
-            imagePath: ImageConstant.imgArrowRight,
-            height: 24.adaptSize,
-            width: 24.adaptSize,
-            margin: EdgeInsets.only(
-              left: 109.h,
-              top: 1.v,
             ),
           ),
         ],

@@ -3,6 +3,8 @@ import 'package:country_pickers/country_pickers.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:hotal_trade/core/app_export.dart';
+import 'package:hotal_trade/presentation/select_country_bottomsheet/controller/select_country_controller.dart';
+import 'package:hotal_trade/presentation/select_country_bottomsheet/select_country_bottomsheet.dart';
 import 'package:hotal_trade/widgets/custom_text_form_field.dart';
 
 // ignore: must_be_immutable
@@ -36,6 +38,23 @@ class CustomPhoneNumber extends StatelessWidget {
       ),
       child: Row(
         children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 8.h,
+                right: 5.h,
+              ),
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: CustomTextFormField(
+                  textInputType: TextInputType.phone,
+                  width: 240.h,
+                  controller: controller,
+                  hintText: "+${country.phoneCode}".tr,
+                ),
+              ),
+            ),
+          ),
           InkWell(
             onTap: () {
               _openCountryPicker(context);
@@ -59,7 +78,11 @@ class CustomPhoneNumber extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    ClipRRect(
+                     SizedBox(
+                     width: 7,
+                       child: Icon(Icons.keyboard_arrow_down)),
+                   SizedBox(width:2,),
+                   ClipRRect(
                       borderRadius: BorderRadius.circular(
                         3.h,
                       ),
@@ -67,25 +90,8 @@ class CustomPhoneNumber extends StatelessWidget {
                         country,
                       ),
                     ),
-                   SizedBox(width: 2,),
-                   SizedBox(
-                     width: 7,
-                       child: Icon(Icons.keyboard_arrow_down)),
                   ],
                 ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 8.h,
-                right: 5.h,
-              ),
-              child: CustomTextFormField(
-                width: 240.h,
-                controller: controller,
-                hintText: "+${country.phoneCode}".tr,
               ),
             ),
           ),
@@ -94,46 +100,7 @@ class CustomPhoneNumber extends StatelessWidget {
     );
   }
 
-  Widget _buildDialogItem(Country country) => Row(
-        children: <Widget>[
-          CountryPickerUtils.getDefaultFlagImage(country),
-          Container(
-            margin: EdgeInsets.only(
-              left: 50.h,
-            ),
-            width: 60.h,
-            child: Text(
-              "+${country.phoneCode}",
-              style: TextStyle(fontSize: 14.fSize),
-            ),
-          ),
-          const SizedBox(width: 8.0),
-          Flexible(
-            child: Text(
-              country.name,
-              style: TextStyle(fontSize: 14.fSize),
-            ),
-          ),
-        ],
-      );
-  void _openCountryPicker(BuildContext context) => showDialog(
-
-    context: context,
-    builder: (context) => Container(
-      // width: 500.0, // Set the width of the dialog
-      // height: 0.0, // Set the height of the dialog
-      child: CountryPickerDialog(
-        searchInputDecoration: InputDecoration(
-          hintText: 'البحث ',
-          hintStyle: TextStyle(fontSize: 14.0,textBaseline: TextBaseline.alphabetic),
-        ),
-        isSearchable: true,
-        title: Text('حددالدوله', style: TextStyle(fontSize: 14.0)),
-        onValuePicked: (Country country) => onTap(country),
-        itemBuilder: _buildDialogItem,
-
-
-      ),
-    ),
+  void _openCountryPicker(BuildContext context) =>Get.bottomSheet(
+    SelectCountryBottomsheet(Get.find<SelectCountryController>())
   );
 }

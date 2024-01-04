@@ -1,3 +1,5 @@
+import 'package:hotal_trade/presentation/upload_photo_screen/controller/upload_photo_controller.dart';
+
 import 'controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:hotal_trade/core/app_export.dart';
@@ -25,30 +27,21 @@ class SignUpScreen extends GetWidget<SignUpController> {
             horizontal: 20.h,
             vertical: 3.v,
           ),
-          child: Column(
-            children: [
-              _buildFrameRow(),
-              SizedBox(height: 2.v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
+          child: Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildFrameRow(),
+                SizedBox(height: 2.v),
+                Text(
                   "msg".tr,
                   style: theme.textTheme.bodyLarge,
                 ),
-              ),
-              SizedBox(height: 25.v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                SizedBox(height: 25.v),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 2.v),
-                      child: Text(
-                        "lbl2".tr,
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ),
                     Padding(
                       padding: EdgeInsets.only(left: 4.h),
                       child: Text(
@@ -56,36 +49,85 @@ class SignUpScreen extends GetWidget<SignUpController> {
                         style: theme.textTheme.titleSmall,
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 2.v),
+                      child: Text(
+                        "lbl2".tr,
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              SizedBox(height: 7.v),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.uploadPhotoScreen);
-                },
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgUser,
-                  height: 70.adaptSize,
-                  width: 70.adaptSize,
-                  alignment: Alignment.centerRight,
+                SizedBox(height: 7.v),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.uploadPhotoScreen);
+                  },
+                  child: Obx(() {
+                      return Container(
+                        height: 70.adaptSize,
+                        width: 70.adaptSize,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        decoration:BoxDecoration(
+                          borderRadius: BorderRadius.circular(35.adaptSize),
+                        ),
+                        child:
+                        Get.find<UploadPhotoController>().photo.value?.path != null ?
+                        Stack(
+                          children: [
+                            CustomImageView(
+                              imagePath: Get.find<UploadPhotoController>().photo.value?.path,
+                              height: 70.adaptSize,
+                              width: 70.adaptSize,
+                              alignment: Alignment.centerRight,
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional.bottomStart,
+                              child: CircleAvatar(
+                                radius: 11.v,
+                                backgroundColor: Colors.white,
+                                child:CustomImageView(
+                                imagePath: ImageConstant.imgTelevision,
+                              ) ,),
+                            )
+                          ],
+                        ):
+                        CustomImageView(
+                          imagePath:ImageConstant.imgUser,
+                          height: 70.adaptSize,
+                          width: 70.adaptSize,
+                          alignment: Alignment.centerRight,
+                        ),
+                      );
+                    }
+                  ),
                 ),
-              ),
-              SizedBox(height: 17.v),
-              _buildDefaultColumn(),
-              SizedBox(height: 18.v),
-              _buildDefaultColumn1(),
-              SizedBox(height: 24.v),
-              CustomElevatedButton(
-                text: "lbl6".tr,
-                buttonStyle: CustomButtonStyles.fillGray,
-              ),
-              SizedBox(height: 25.v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                SizedBox(height: 17.v),
+                _buildDefaultColumn(),
+                SizedBox(height: 18.v),
+                _buildDefaultColumn1(),
+                SizedBox(height: 24.v),
+                Obx(() {
+                    return CustomElevatedButton(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.signUpTwoScreen);
+                      },
+                      text: "lbl6".tr,
+                      buttonStyle: controller.activeNextButton.value? null: CustomButtonStyles.fillGray,
+                    );
+                  }
+                ),
+                SizedBox(height: 25.v),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 1.h),
+                      child: Text(
+                        "msg2".tr,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
                     TextButton(
                       onPressed: () {
                         Get.toNamed(AppRoutes.logInScreen);
@@ -95,18 +137,11 @@ class SignUpScreen extends GetWidget<SignUpController> {
                         style: CustomTextStyles.titleSmallPrimary,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 1.h),
-                      child: Text(
-                        "msg2".tr,
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                    ),
                   ],
                 ),
-              ),
-              SizedBox(height: 5.v),
-            ],
+                SizedBox(height: 5.v),
+              ],
+            ),
           ),
         ),
       ),
@@ -115,12 +150,14 @@ class SignUpScreen extends GetWidget<SignUpController> {
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      actions: [
-        IconButton(onPressed: () {
-
-        }, icon: Icon(Icons.close)),
-      ],
+    return AppBar(
+     leading:   AppbarTrailingImage(
+       onTap:(){
+         Get.back();
+       },
+       imagePath: ImageConstant.imgVector,
+       margin: EdgeInsets.all(22.h),
+     ),
     );
   }
 
@@ -129,6 +166,10 @@ class SignUpScreen extends GetWidget<SignUpController> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Text(
+          "lbl".tr,
+          style: theme.textTheme.headlineSmall,
+        ),
         Padding(
           padding: EdgeInsets.only(
             top: 8.v,
@@ -138,10 +179,6 @@ class SignUpScreen extends GetWidget<SignUpController> {
             "lbl_1_2".tr,
             style: theme.textTheme.bodyMedium,
           ),
-        ),
-        Text(
-          "lbl".tr,
-          style: theme.textTheme.headlineSmall,
         ),
       ],
     );
@@ -160,6 +197,14 @@ class SignUpScreen extends GetWidget<SignUpController> {
         ),
         SizedBox(height: 6.v),
         CustomTextFormField(
+          validator: (value) {
+            if(value!.isEmpty){
+              return "This field is required";
+            }
+          },
+          onChanged:(value) {
+            controller.checkEmpty();
+          },
           controller: controller.editTextController,
         ),
       ],
@@ -179,6 +224,14 @@ class SignUpScreen extends GetWidget<SignUpController> {
         ),
         SizedBox(height: 5.v),
         CustomTextFormField(
+          validator: (value) {
+            if(value!.isEmpty){
+              return "This field is required";
+            }
+          },
+          onChanged:(value) {
+            controller.checkEmpty();
+          },
           controller: controller.editTextController1,
           textInputAction: TextInputAction.done,
         ),

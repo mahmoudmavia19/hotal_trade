@@ -23,8 +23,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme,
         translations: AppLocalization(),
-        locale: Get.deviceLocale, //for setting localization strings
-        fallbackLocale: Locale('en', 'US'),
+        locale: Locale('ar', 'AA'), //for setting localization strings
+        fallbackLocale: Locale('ar', 'AA'),
         title: 'hotal_trade',
         initialBinding: InitialBindings(),
         initialRoute: AppRoutes.initialRoute,

@@ -11,7 +11,20 @@ class SignUpController extends GetxController {
 
   TextEditingController editTextController1 = TextEditingController();
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   Rx<SignUpModel> signUpModelObj = SignUpModel().obs;
+
+  RxBool activeNextButton = false.obs;
+
+  checkEmpty() {
+    if (editTextController.text.isEmpty || editTextController1.text.isEmpty) {
+      activeNextButton.value = false;
+    }
+    else {
+      activeNextButton.value = true;
+    }
+  }
 
   @override
   void onClose() {

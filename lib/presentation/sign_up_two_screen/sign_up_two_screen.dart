@@ -55,52 +55,46 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
                 buttonStyle: CustomButtonStyles.fillGray,
               ),
               SizedBox(height: 25.v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 1.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        "lbl7".tr,
-                        style: CustomTextStyles.titleSmallPrimary,
+              Padding(
+                padding: EdgeInsets.only(right: 1.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 1.h),
+                      child: Text(
+                        "msg2".tr,
+                        style: theme.textTheme.bodyMedium,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 1.h),
-                        child: Text(
-                          "msg2".tr,
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Text(
+                      "lbl7".tr,
+                      style: CustomTextStyles.titleSmallPrimary,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 14.v),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 1.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 1.v),
-                        child: Text(
-                          "lbl21".tr,
-                          style: CustomTextStyles.titleSmallPrimary,
-                        ),
+              Padding(
+                padding: EdgeInsets.only(right: 1.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 2.h),
+                      child: Text(
+                        "msg12".tr,
+                        style: theme.textTheme.bodyMedium,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 2.h),
-                        child: Text(
-                          "msg12".tr,
-                          style: theme.textTheme.bodyMedium,
-                        ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 1.v),
+                      child: Text(
+                        "lbl21".tr,
+                        style: CustomTextStyles.titleSmallPrimary,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 5.v),
@@ -113,13 +107,15 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      actions: [
+    return AppBar(
+      leading:
         AppbarTrailingImage(
+          onTap:(){
+            Get.back();
+          },
           imagePath: ImageConstant.imgVector,
           margin: EdgeInsets.all(22.h),
         ),
-      ],
     );
   }
 
@@ -130,6 +126,10 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Text(
+            "lbl".tr,
+            style: theme.textTheme.headlineSmall,
+          ),
           Padding(
             padding: EdgeInsets.only(
               top: 8.v,
@@ -139,10 +139,6 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
               "lbl_2_2".tr,
               style: theme.textTheme.bodyMedium,
             ),
-          ),
-          Text(
-            "lbl".tr,
-            style: theme.textTheme.headlineSmall,
           ),
         ],
       ),
@@ -168,7 +164,7 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
           SizedBox(height: 6.v),
           CustomTextFormField(
             controller: controller.vuesaxlinearcloudplusController,
-            prefix: Container(
+            suffix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 13.v, 30.h, 13.v),
               child: CustomImageView(
                 imagePath: ImageConstant.imgVuesaxLinearCloudplus,
@@ -255,7 +251,7 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
           CustomTextFormField(
             controller: controller.eyeoffController,
             textInputAction: TextInputAction.done,
-            prefix: Container(
+            suffix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 14.v, 30.h, 14.v),
               child: InkWell(
                 onTap: (){

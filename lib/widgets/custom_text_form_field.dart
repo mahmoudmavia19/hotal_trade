@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.filled = false,
     this.validator,
+    this.onChanged,
   }) : super(
           key: key,
         );
@@ -70,6 +71,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? filled;
 
   final FormFieldValidator<String>? validator;
+  final void Function(String)? onChanged ;
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,7 @@ class CustomTextFormField extends StatelessWidget {
         child: TextFormField(
           controller: controller,
           focusNode: focusNode ?? FocusNode(),
+          onChanged:onChanged ,
           autofocus: autofocus!,
           style: textStyle ?? theme.textTheme.bodyMedium,
           obscureText: obscureText!,

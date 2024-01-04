@@ -63,13 +63,14 @@ class LogInScreen extends GetWidget<LogInController> {
 
   /// Section Widget
   PreferredSizeWidget _buildAppBar() {
-    return CustomAppBar(
-      actions: [
-        AppbarTrailingImageOne(
-          imagePath: ImageConstant.imgVector190,
-          margin: EdgeInsets.fromLTRB(24.h, 22.v, 24.h, 23.v),
-        ),
-      ],
+    return AppBar(
+    leading: AppbarTrailingImageOne(
+      imagePath: ImageConstant.imgVector190,
+      margin: EdgeInsets.fromLTRB(24.h, 22.v, 0.h, 23.v),
+      onTap:(){
+        Get.back();
+      },
+    ),
     );
   }
 
@@ -147,16 +148,16 @@ class LogInScreen extends GetWidget<LogInController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "msg8".tr,
-                textAlign: TextAlign.right,
-                style: CustomTextStyles.bodyMediumRed600,
-              ),
               CustomImageView(
                 imagePath: ImageConstant.imgHugeIconInter,
                 height: 20.adaptSize,
                 width: 20.adaptSize,
                 margin: EdgeInsets.only(left: 4.h),
+              ),
+              Text(
+                "msg8".tr,
+                textAlign: TextAlign.right,
+                style: CustomTextStyles.bodyMediumRed600,
               ),
             ],
           ),
@@ -182,7 +183,7 @@ class LogInScreen extends GetWidget<LogInController> {
           CustomTextFormField(
             controller: controller.eyeoffController,
             textInputAction: TextInputAction.done,
-            prefix: Container(
+            suffix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 14.v, 30.h, 14.v),
               child: CustomImageView(
                 imagePath: ImageConstant.imgEyeoff,
@@ -190,7 +191,7 @@ class LogInScreen extends GetWidget<LogInController> {
                 width: 20.adaptSize,
               ),
             ),
-            prefixConstraints: BoxConstraints(
+            suffixConstraints: BoxConstraints(
               maxHeight: 48.v,
             ),
             obscureText: true,

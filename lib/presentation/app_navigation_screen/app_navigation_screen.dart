@@ -43,11 +43,6 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                               onTapScreenTitle(AppRoutes.logInScreen),
                         ),
                         _buildScreenTitle(
-                          screenTitle: "Sign up One".tr,
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.signUpOneScreen),
-                        ),
-                        _buildScreenTitle(
                           screenTitle: "upload  photo".tr,
                           onTapScreenTitle: () =>
                               onTapScreenTitle(AppRoutes.uploadPhotoScreen),
@@ -56,11 +51,6 @@ class AppNavigationScreen extends GetWidget<AppNavigationController> {
                           screenTitle: "Sign up Two".tr,
                           onTapScreenTitle: () =>
                               onTapScreenTitle(AppRoutes.signUpTwoScreen),
-                        ),
-                        _buildScreenTitle(
-                          screenTitle: "Sign up Three".tr,
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(AppRoutes.signUpThreeScreen),
                         ),
                       ],
                     ),

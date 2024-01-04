@@ -21,6 +21,12 @@ class ListofrowsItemWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        Obx(
+          () => Text(
+            listofrowsItemModelObj.countryName!.value,
+            style: theme.textTheme.titleSmall,
+          ),
+        ),
         Padding(
           padding: EdgeInsets.only(bottom: 1.v),
           child: Obx(
@@ -28,12 +34,6 @@ class ListofrowsItemWidget extends StatelessWidget {
               listofrowsItemModelObj.phoneNumber!.value,
               style: CustomTextStyles.titleSmallPrimary,
             ),
-          ),
-        ),
-        Obx(
-          () => Text(
-            listofrowsItemModelObj.countryName!.value,
-            style: theme.textTheme.titleSmall,
           ),
         ),
       ],
