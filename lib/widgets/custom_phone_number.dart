@@ -57,13 +57,21 @@ class CustomPhoneNumber extends StatelessWidget {
                   right: 32.h,
                   bottom: 12.v,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    3.h,
-                  ),
-                  child: CountryPickerUtils.getDefaultFlagImage(
-                    country,
-                  ),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        3.h,
+                      ),
+                      child: CountryPickerUtils.getDefaultFlagImage(
+                        country,
+                      ),
+                    ),
+                   SizedBox(width: 2,),
+                   SizedBox(
+                     width: 7,
+                       child: Icon(Icons.keyboard_arrow_down)),
+                  ],
                 ),
               ),
             ),
@@ -77,7 +85,7 @@ class CustomPhoneNumber extends StatelessWidget {
               child: CustomTextFormField(
                 width: 240.h,
                 controller: controller,
-                hintText: "lbl_966".tr,
+                hintText: "+${country.phoneCode}".tr,
               ),
             ),
           ),
@@ -91,7 +99,7 @@ class CustomPhoneNumber extends StatelessWidget {
           CountryPickerUtils.getDefaultFlagImage(country),
           Container(
             margin: EdgeInsets.only(
-              left: 10.h,
+              left: 50.h,
             ),
             width: 60.h,
             child: Text(
@@ -109,17 +117,23 @@ class CustomPhoneNumber extends StatelessWidget {
         ],
       );
   void _openCountryPicker(BuildContext context) => showDialog(
-        context: context,
-        builder: (context) => CountryPickerDialog(
-          searchInputDecoration: InputDecoration(
-            hintText: 'Search...',
-            hintStyle: TextStyle(fontSize: 14.fSize),
-          ),
-          isSearchable: true,
-          title: Text('Select your phone code',
-              style: TextStyle(fontSize: 14.fSize)),
-          onValuePicked: (Country country) => onTap(country),
-          itemBuilder: _buildDialogItem,
+
+    context: context,
+    builder: (context) => Container(
+      // width: 500.0, // Set the width of the dialog
+      // height: 0.0, // Set the height of the dialog
+      child: CountryPickerDialog(
+        searchInputDecoration: InputDecoration(
+          hintText: 'البحث ',
+          hintStyle: TextStyle(fontSize: 14.0,textBaseline: TextBaseline.alphabetic),
         ),
-      );
+        isSearchable: true,
+        title: Text('حددالدوله', style: TextStyle(fontSize: 14.0)),
+        onValuePicked: (Country country) => onTap(country),
+        itemBuilder: _buildDialogItem,
+
+
+      ),
+    ),
+  );
 }

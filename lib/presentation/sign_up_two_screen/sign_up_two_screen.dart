@@ -237,6 +237,9 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
 
   /// Section Widget
   Widget _buildDefaultColumn2() {
+    bool isIconVisible = true;
+    bool obscureText=true;
+
     return Padding(
       padding: EdgeInsets.only(left: 1.h),
       child: Column(
@@ -254,16 +257,22 @@ class SignUpTwoScreen extends GetWidget<SignUpTwoController> {
             textInputAction: TextInputAction.done,
             prefix: Container(
               margin: EdgeInsets.fromLTRB(12.h, 14.v, 30.h, 14.v),
-              child: CustomImageView(
-                imagePath: ImageConstant.imgEyeoff,
-                height: 20.adaptSize,
-                width: 20.adaptSize,
+              child: InkWell(
+                onTap: (){
+                  bool:true;
+                },
+                child: CustomImageView(
+
+                  imagePath: ImageConstant.imgEyeoff,
+                  height: 20.adaptSize,
+                  width: 20.adaptSize,
+                ),
               ),
             ),
             prefixConstraints: BoxConstraints(
               maxHeight: 48.v,
             ),
-            obscureText: true,
+            obscureText: false,
           ),
         ],
       ),
